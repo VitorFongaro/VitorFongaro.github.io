@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vitor Fongaro · Portfólio</title>
-<meta name="description" content="Portfólio de Vitor Fongaro — desenvolvedor full-stack e game dev.">
+<meta name="description" content="Portfólio de Vitor Fongaro — desenvolvedor backend e game dev. / Portfolio of Vitor Fongaro — backend developer and game dev.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23dad4bb'/%3E%3Crect x='4' y='4' width='8' height='8' fill='%234e4b42'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,6 +229,23 @@ footer.hint{
   *,*::before,*::after{animation:none!important;transition:none!important}
   #particles,.scan{display:none}
 }
+
+/* ───────── troca de idioma ───────── */
+.top-right{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+.lang{display:flex;border:1px solid var(--ink)}
+.lang button{
+  font-family:var(--mono);font-size:12px;letter-spacing:.15em;background:transparent;color:var(--ink);
+  border:0;padding:5px 12px;cursor:pointer;transition:background .2s,color .2s;
+}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.lang button:not([aria-pressed="true"]):hover{background:rgba(78,75,66,.15)}
+.dl-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.dl-row{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--ink-faint);flex-wrap:wrap}
+.dl-row .f{font-family:var(--mono);font-size:13px}
+.dl-row .f small{display:block;color:var(--ink-soft);font-size:11px;margin-top:2px}
+@media (max-width:820px){
+  .top-right{flex-direction:row-reverse;justify-content:space-between;align-items:center;width:100%}
+}
 </style>
 </head>
 <body>
@@ -244,22 +261,28 @@ footer.hint{
   <div class="boot-box">
     <div class="boot-lines" id="bootLines"></div>
     <div class="boot-bar"><i id="bootBar"></i></div>
-    <div class="boot-skip">[ clique ou aperte qualquer tecla para pular ]</div>
+    <div class="boot-skip" data-i18n="bootSkip"></div>
   </div>
 </div>
 
 <div class="app">
   <header class="top">
-    <h1 class="title"><small>// UNIDADE V-F · ARQUIVO PESSOAL</small>Vitor Fongaro</h1>
-    <div class="clock" id="clock">—</div>
+    <h1 class="title"><small data-i18n="kicker"></small>Vitor Fongaro</h1>
+    <div class="top-right">
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button data-lang="pt" aria-pressed="true">PT</button>
+        <button data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <div class="clock" id="clock">—</div>
+    </div>
   </header>
   <div class="rule"></div>
 
-  <nav class="tabs" role="tablist" aria-label="Seções">
-    <button class="tab" role="tab" data-view="status" aria-selected="true"><span class="k">01</span>Status</button>
-    <button class="tab" role="tab" data-view="quests" aria-selected="false"><span class="k">02</span>Missões</button>
-    <button class="tab" role="tab" data-view="chips" aria-selected="false"><span class="k">03</span>Chips</button>
-    <button class="tab" role="tab" data-view="system" aria-selected="false"><span class="k">04</span>Sistema</button>
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" data-view="status" aria-selected="true"><span class="k">01</span><span data-i18n="tabStatus"></span></button>
+    <button class="tab" role="tab" data-view="quests" aria-selected="false"><span class="k">02</span><span data-i18n="tabQuests"></span></button>
+    <button class="tab" role="tab" data-view="chips" aria-selected="false"><span class="k">03</span><span data-i18n="tabChips"></span></button>
+    <button class="tab" role="tab" data-view="system" aria-selected="false"><span class="k">04</span><span data-i18n="tabSystem"></span></button>
   </nav>
 
   <main>
@@ -267,30 +290,22 @@ footer.hint{
     <section class="view active" id="view-status" role="tabpanel">
       <div class="status-grid">
         <div>
-          <div class="section-label">DADOS DA UNIDADE</div>
+          <div class="section-label" data-i18n="unitData"></div>
           <div class="panel">
             <div class="panel-head"><span>Vitor Fongaro</span><span class="id">LV. ??</span></div>
             <div class="panel-body">
-              <div class="desc">
-                <p>Desenvolvedor full-stack do Brasil. Gosto de construir coisas que as pessoas usam de verdade — e, quando dá, transformar isso em jogo.</p>
-                <p>Meu projeto principal é o <strong>Reprogrammed</strong>, meu TCC: um jogo web em que uma androide sobe uma torre resolvendo desafios de lógica de programação. Também ando mexendo com Unity e jogos de terror psicológico.</p>
-              </div>
-              <dl class="kv">
-                <dt>CLASSE</dt><dd>Full-Stack Developer</dd>
-                <dt>SUBCLASSE</dt><dd>Web Developer / Game Dev</dd>
-                <dt>REGIÃO</dt><dd>Brasil · UTC −03:00</dd>
-                <dt>ESTADO</dt><dd>Loading next level…</dd>
-              </dl>
+              <div class="desc" data-i18n-html="bio"></div>
+              <dl class="kv" id="statusKv"></dl>
             </div>
           </div>
         </div>
         <div>
-          <div class="section-label">ATRIBUTOS</div>
+          <div class="section-label" data-i18n="attributes"></div>
           <div class="portrait" aria-hidden="true">
             <svg viewBox="0 0 200 200" id="sigil"></svg>
           </div>
           <div class="bars" id="bars" style="margin-top:22px"></div>
-          <div class="hp"><span>HP 1337/1337</span><span>CAFÉ ▮▮▮▮▯</span><span>BUGS ∞</span></div>
+          <div class="hp" data-i18n-html="hp"></div>
         </div>
       </div>
     </section>
@@ -299,7 +314,7 @@ footer.hint{
     <section class="view" id="view-quests" role="tabpanel">
       <div class="split">
         <div>
-          <div class="section-label">REGISTRO DE MISSÕES</div>
+          <div class="section-label" data-i18n="questLog"></div>
           <ul class="list" id="questList"></ul>
         </div>
         <div class="panel" id="questPanel"></div>
@@ -310,8 +325,8 @@ footer.hint{
     <section class="view" id="view-chips" role="tabpanel">
       <div class="split">
         <div>
-          <div class="section-label">CHIPS INSTALADOS</div>
-          <div class="capacity"><span>CAPACIDADE</span><div class="track"><div class="fill" id="capFill"></div></div><span id="capText">0/128</span></div>
+          <div class="section-label" data-i18n="chipsInstalled"></div>
+          <div class="capacity"><span data-i18n="capacity"></span><div class="track"><div class="fill" id="capFill"></div></div><span id="capText">0/128</span></div>
           <ul class="list" id="chipList"></ul>
         </div>
         <div class="panel" id="chipPanel"></div>
@@ -322,7 +337,7 @@ footer.hint{
     <section class="view" id="view-system" role="tabpanel">
       <div class="split">
         <div>
-          <div class="section-label">CANAIS DE COMUNICAÇÃO</div>
+          <div class="section-label" data-i18n="channels"></div>
           <ul class="list" id="sysList"></ul>
         </div>
         <div class="panel" id="sysPanel"></div>
@@ -334,74 +349,155 @@ footer.hint{
 <footer class="hint">
   <div class="hint-inner">
     <div class="keys">
-      <span><b>Q</b><b>E</b>Trocar aba</span>
-      <span class="opt"><b>↑</b><b>↓</b>Navegar</span>
-      <span class="opt"><b>Enter</b>Abrir</span>
+      <span><b>Q</b><b>E</b><span data-i18n="keyTabs"></span></span>
+      <span class="opt"><b>↑</b><b>↓</b><span data-i18n="keyNav"></span></span>
+      <span class="opt"><b>Enter</b><span data-i18n="keyOpen"></span></span>
     </div>
-    <button class="sound-toggle" id="soundBtn" aria-pressed="false">♪ SOM: OFF</button>
+    <button class="sound-toggle" id="soundBtn" aria-pressed="false"></button>
   </div>
 </footer>
 
 <script>
-/* ════════════════════ DADOS ════════════════════ */
+/* ════════════════════ TEXTOS (PT / EN) ════════════════════ */
+const UI = {
+  pt:{
+    htmlLang:'pt-BR', title:'Vitor Fongaro · Portfólio',
+    kicker:'// UNIDADE V-F · ARQUIVO PESSOAL',
+    tabStatus:'Status', tabQuests:'Missões', tabChips:'Chips', tabSystem:'Sistema',
+    unitData:'DADOS DA UNIDADE', attributes:'ATRIBUTOS', questLog:'REGISTRO DE MISSÕES',
+    chipsInstalled:'CHIPS INSTALADOS', capacity:'CAPACIDADE', channels:'CANAIS DE COMUNICAÇÃO',
+    keyTabs:'Trocar aba', keyNav:'Navegar', keyOpen:'Abrir',
+    sound:'SOM', bootSkip:'[ clique ou aperte qualquer tecla para pular ]',
+    bio:`<p>Desenvolvedor backend focado em dados, do interior de São Paulo. No trabalho, desenvolvo um Sistema de Informação Geográfica em Delphi e SQL Server usado na gestão cadastral de prefeituras — migrando, sincronizando e garantindo a integridade de dados entre bases, planilhas e tabelas legadas.</p>
+         <p>Fora dele, faço jogos: o <strong>Reprogrammed</strong>, meu TCC, é um jogo web em que uma androide sobe uma torre resolvendo desafios de lógica de programação. Também ando mexendo com Unity e terror psicológico.</p>`,
+    kv:[['CLASSE','Backend Developer'],['SUBCLASSE','Game Dev'],['GUILDA','EGATI Engenharia & Negócios'],['ACADEMIA','Eng. de Software · UNILINS (2026)'],['REGIÃO','Lins, SP · Brasil'],['ESTADO','Loading next level…']],
+    attrs:[['LÓGICA',82],['BACK-END',80],['BANCO DE DADOS',84],['FRONT-END',66],['GAME DEV',60],['SORTE NO DEPLOY',23]],
+    hp:'<span>HP 1337/1337</span><span>CAFÉ ▮▮▮▮▯</span><span>BUGS ∞</span>',
+    type:'TIPO', status:'STATUS', play:'Jogar / Abrir', source:'Código-fonte', classified:'Arquivo confidencial',
+    level:'NÍVEL', size:'TAMANHO', open:'CANAL ABERTO', address:'ENDEREÇO', connect:'Conectar', copy:'Copiar', copied:'ENDEREÇO COPIADO',
+    download:'Baixar', cvOpen:'ARQUIVO DISPONÍVEL',
+    boot:['> INICIANDO SISTEMA ............ OK','> VERIFICANDO MEMÓRIA .......... OK','> CARREGANDO DADOS DA UNIDADE .. OK','> CONECTANDO AO GITHUB ......... OK','> UNIDADE: VITOR FONGARO','> CLASSE:  BACKEND DEVELOPER','','  BEM-VINDO.'],
+    langToast:'IDIOMA: PORTUGUÊS'
+  },
+  en:{
+    htmlLang:'en', title:'Vitor Fongaro · Portfolio',
+    kicker:'// UNIT V-F · PERSONAL ARCHIVE',
+    tabStatus:'Status', tabQuests:'Quests', tabChips:'Chips', tabSystem:'System',
+    unitData:'UNIT DATA', attributes:'ATTRIBUTES', questLog:'QUEST LOG',
+    chipsInstalled:'INSTALLED CHIPS', capacity:'CAPACITY', channels:'COMMUNICATION CHANNELS',
+    keyTabs:'Switch tab', keyNav:'Navigate', keyOpen:'Open',
+    sound:'SOUND', bootSkip:'[ click or press any key to skip ]',
+    bio:`<p>Backend developer focused on data, from the countryside of São Paulo, Brazil. At work I build a Geographic Information System in Delphi and SQL Server used for municipal property registry management — migrating, synchronizing and ensuring data integrity across databases, spreadsheets and legacy tables.</p>
+         <p>Outside of it, I make games: <strong>Reprogrammed</strong>, my capstone project, is a web game where an android climbs a tower by solving programming logic challenges. I've also been working with Unity and psychological horror.</p>`,
+    kv:[['CLASS','Backend Developer'],['SUBCLASS','Game Dev'],['GUILD','EGATI Engenharia & Negócios'],['ACADEMY','Software Engineering · UNILINS (2026)'],['REGION','Lins, SP · Brazil'],['STATE','Loading next level…']],
+    attrs:[['LOGIC',82],['BACK-END',80],['DATABASES',84],['FRONT-END',66],['GAME DEV',60],['DEPLOY LUCK',23]],
+    hp:'<span>HP 1337/1337</span><span>COFFEE ▮▮▮▮▯</span><span>BUGS ∞</span>',
+    type:'TYPE', status:'STATUS', play:'Play / Open', source:'Source code', classified:'Classified file',
+    level:'LEVEL', size:'SIZE', open:'CHANNEL OPEN', address:'ADDRESS', connect:'Connect', copy:'Copy', copied:'ADDRESS COPIED',
+    download:'Download', cvOpen:'FILE AVAILABLE',
+    boot:['> BOOTING SYSTEM ............... OK','> CHECKING MEMORY .............. OK','> LOADING UNIT DATA ............ OK','> CONNECTING TO GITHUB ......... OK','> UNIT:  VITOR FONGARO','> CLASS: BACKEND DEVELOPER','','  WELCOME.'],
+    langToast:'LANGUAGE: ENGLISH'
+  }
+};
+
 const QUESTS = [
   {
-    id:'Q-001', name:'Reprogrammed', type:'Missão principal', status:'Em andamento',
-    desc:'Meu TCC: jogo web que ensina lógica de programação. Numa Terra controlada pela IA ADA, a androide Artemis sobe andar por andar até o núcleo — e cada porta trancada ou robô hostil é, no fundo, um pequeno programa montado em blocos. Cada andar é um conceito (variáveis, condicionais…) com um boss inspirado em um computador histórico, como o ENIAC.',
-    stack:['JavaScript','HTML','CSS','Gamificação'],
+    id:'Q-001', name:'Reprogrammed',
+    type:{pt:'Missão principal',en:'Main quest'}, status:{pt:'Em andamento',en:'In progress'},
+    desc:{
+      pt:'Meu TCC, feito em dupla: jogo web que ensina lógica de programação. Numa Terra controlada pela IA ADA, a androide Artemis sobe andar por andar até o núcleo — e cada porta trancada ou robô hostil é, no fundo, um pequeno programa montado em blocos. Cada andar é um conceito (variáveis, condicionais…) com um boss inspirado em um computador histórico, como o ENIAC.',
+      en:'My capstone project, built as a team of two: a web game that teaches programming logic. On an Earth controlled by the AI ADA, the android Artemis climbs floor by floor to the core — and every locked door or hostile robot is, deep down, a small program built with blocks. Each floor is a concept (variables, conditionals…) with a boss inspired by a historic computer, like ENIAC.'
+    },
+    stack:['Node.js','Express','PostgreSQL','Supabase Auth','Phaser','Vite'],
     repo:'https://github.com/VitorFongaro/Reprogrammed', live:'https://reprogrammed.vercel.app'
   },
   {
-    id:'Q-002', name:'Where I Left Them', type:'Missão secreta', status:'Em desenvolvimento',
-    desc:'Jogo de terror psicológico em primeira pessoa, feito em Unity 6 com URP. Você é o Dr. Emil Kummer, um psiquiatra explorando um asilo abandonado — com lanterna, disjuntores, portas trancadas e algo patrulhando o subsolo.',
-    stack:['Unity','C#','URP'],
-    repo:null, live:null
+    id:'Q-002', name:'Where I Left Them',
+    type:{pt:'Missão secreta',en:'Secret quest'}, status:{pt:'Em desenvolvimento',en:'In development'},
+    desc:{
+      pt:'Jogo de terror psicológico em primeira pessoa, feito em Unity 6 com URP. Você é o Dr. Emil Kummer, um psiquiatra explorando um asilo abandonado — com lanterna, disjuntores, portas trancadas e algo patrulhando o subsolo.',
+      en:'First-person psychological horror game made in Unity 6 with URP. You are Dr. Emil Kummer, a psychiatrist exploring an abandoned asylum — with a flashlight, breakers, locked doors and something patrolling the basement.'
+    },
+    stack:['Unity','C#','URP'], repo:null, live:null
   },
   {
-    id:'Q-003', name:'RetroTube', type:'Missão secundária', status:'Concluída',
-    desc:'Downloader de vídeos e músicas com interface inspirada em consoles, fitas e computadores retrô. Cinco temas (Neon arcade, VHS horror, Walkman, Game Boy e Windows 95), progresso em tempo real e telas de YOU WIN / GAME OVER.',
+    id:'Q-003', name:'RetroTube',
+    type:{pt:'Missão secundária',en:'Side quest'}, status:{pt:'Concluída',en:'Completed'},
+    desc:{
+      pt:'Downloader de vídeos e músicas com interface inspirada em consoles, fitas e computadores retrô. Cinco temas (Neon arcade, VHS horror, Walkman, Game Boy e Windows 95), progresso em tempo real e telas de YOU WIN / GAME OVER.',
+      en:'Video and music downloader with an interface inspired by retro consoles, tapes and computers. Five themes (Neon arcade, VHS horror, Walkman, Game Boy and Windows 95), real-time progress and YOU WIN / GAME OVER screens.'
+    },
     stack:['JavaScript','Python','FastAPI','yt-dlp','FFmpeg'],
     repo:'https://github.com/VitorFongaro/RetroTube', live:null
   },
   {
-    id:'Q-004', name:'HydroTech', type:'Missão secundária', status:'Concluída',
-    desc:'Sistema de monitoramento de consumo de água com dashboard web em tempo real e persistência de dados no Supabase.',
+    id:'Q-004', name:'HydroTech',
+    type:{pt:'Missão secundária',en:'Side quest'}, status:{pt:'Concluída',en:'Completed'},
+    desc:{
+      pt:'Sistema de monitoramento de consumo de água com dashboard web em tempo real e persistência de dados no Supabase.',
+      en:'Water consumption monitoring system with a real-time web dashboard and data persistence on Supabase.'
+    },
     stack:['JavaScript','Supabase','ESP32'],
     repo:'https://github.com/VitorFongaro/HydroTech', live:'https://hydro-tech-blue.vercel.app/'
   },
   {
-    id:'Q-005', name:'TaBarato', type:'Missão acadêmica', status:'Concluída',
-    desc:'Trabalho acadêmico para comparar preços de produtos entre diferentes mercados e ajudar a achar a compra mais barata.',
+    id:'Q-005', name:'TaBarato',
+    type:{pt:'Missão acadêmica',en:'Academic quest'}, status:{pt:'Concluída',en:'Completed'},
+    desc:{
+      pt:'Trabalho acadêmico para comparar preços de produtos entre diferentes mercados e ajudar a achar a compra mais barata.',
+      en:'Academic project to compare product prices across different supermarkets and help find the cheapest purchase.'
+    },
     stack:['PHP','MySQL','HTML','CSS'],
     repo:'https://github.com/VitorFongaro/TaBarato', live:null
   },
   {
-    id:'Q-006', name:'CurriculosUnilins', type:'Missão acadêmica', status:'Concluída',
-    desc:'Trabalho acadêmico em PHP envolvendo currículos.',
+    id:'Q-006', name:'CurriculosUnilins',
+    type:{pt:'Missão acadêmica',en:'Academic quest'}, status:{pt:'Concluída',en:'Completed'},
+    desc:{ pt:'Trabalho acadêmico em PHP envolvendo currículos.', en:'Academic project in PHP around résumés.' },
     stack:['PHP','HTML','CSS'],
     repo:'https://github.com/VitorFongaro/CurriculosUnilins', live:null
   }
 ];
 
 const CHIPS = [
-  {name:'JavaScript', lvl:4, size:6, cat:'Linguagem', desc:'Principal arma no front e no back. Usado no Reprogrammed, RetroTube e HydroTech.'},
-  {name:'PHP',        lvl:3, size:5, cat:'Linguagem', desc:'Back-end dos projetos acadêmicos, como TaBarato e CurriculosUnilins.'},
-  {name:'HTML / CSS', lvl:4, size:4, cat:'Linguagem', desc:'Interfaces com personalidade — de temas retrô a menus de jogo (como este aqui).'},
-  {name:'C#',         lvl:2, size:5, cat:'Linguagem', desc:'Scripts de gameplay e ferramentas de editor no Unity.'},
-  {name:'Delphi',     lvl:3, size:5, cat:'Linguagem', desc:'Desenvolvimento de aplicações desktop.'},
-  {name:'C++',        lvl:2, size:4, cat:'Linguagem', desc:'Programação de baixo nível e microcontroladores.'},
-  {name:'SQL Server', lvl:3, size:5, cat:'Banco de dados', desc:'Modelagem e consultas em bancos relacionais.'},
-  {name:'MySQL',      lvl:3, size:4, cat:'Banco de dados', desc:'Banco dos projetos em PHP.'},
-  {name:'Supabase',   lvl:3, size:4, cat:'Plataforma', desc:'Back-end como serviço: Postgres, autenticação e dados em tempo real.'},
-  {name:'Unity',      lvl:2, size:6, cat:'Engine', desc:'Engine do Where I Left Them. URP, iluminação, NavMesh e UI gerada por script.'},
-  {name:'Git / GitHub',lvl:3,size:3, cat:'Ferramenta', desc:'Versionamento, branches e deploy contínuo com Vercel.'}
+  {name:'SQL Server', lvl:4, size:6, cat:{pt:'Banco de dados',en:'Database'}, desc:{pt:'Arma principal no trabalho: consultas, scripts T-SQL e rotinas de migração e sincronização de dados cadastrais.',en:'Main weapon at work: queries, T-SQL scripts and routines for migrating and synchronizing registry data.'}},
+  {name:'Delphi',     lvl:4, size:6, cat:{pt:'Linguagem',en:'Language'}, desc:{pt:'Desenvolvimento e manutenção de um Sistema de Informação Geográfica usado por prefeituras.',en:'Development and maintenance of a Geographic Information System used by municipal governments.'}},
+  {name:'Python',     lvl:3, size:5, cat:{pt:'Linguagem',en:'Language'}, desc:{pt:'Scripts de dados e o back-end do RetroTube com FastAPI.',en:'Data scripts and the RetroTube back end with FastAPI.'}},
+  {name:'JavaScript / Node.js', lvl:3, size:5, cat:{pt:'Linguagem',en:'Language'}, desc:{pt:'API REST do Reprogrammed com Express e o cliente do jogo com Phaser e Vite.',en:'Reprogrammed REST API with Express and the game client with Phaser and Vite.'}},
+  {name:'PostgreSQL', lvl:3, size:4, cat:{pt:'Banco de dados',en:'Database'}, desc:{pt:'Banco do Reprogrammed, com autenticação JWT via Supabase Auth.',en:'Reprogrammed database, with JWT authentication through Supabase Auth.'}},
+  {name:'QGIS / GDAL',lvl:3, size:4, cat:{pt:'Geoespacial',en:'Geospatial'}, desc:{pt:'Conversão e organização de dados geoespaciais, imagens raster e bases de mapas.',en:'Conversion and organization of geospatial data, raster images and map databases.'}},
+  {name:'HTML / CSS', lvl:4, size:3, cat:{pt:'Linguagem',en:'Language'}, desc:{pt:'Interfaces com personalidade — de temas retrô a menus de jogo (como este aqui).',en:'Interfaces with personality — from retro themes to game menus (like this one).'}},
+  {name:'PHP / MySQL',lvl:2, size:4, cat:{pt:'Linguagem',en:'Language'}, desc:{pt:'Back-end dos projetos acadêmicos, como TaBarato e CurriculosUnilins.',en:'Back end of academic projects such as TaBarato and CurriculosUnilins.'}},
+  {name:'Unity / C#', lvl:2, size:5, cat:{pt:'Engine',en:'Engine'}, desc:{pt:'Engine do Where I Left Them: URP, iluminação, NavMesh e UI gerada por script.',en:'Engine behind Where I Left Them: URP, lighting, NavMesh and script-generated UI.'}},
+  {name:'Git / GitHub',lvl:3,size:3, cat:{pt:'Ferramenta',en:'Tool'}, desc:{pt:'Versionamento e deploy contínuo (Vercel e Render a cada push na main).',en:'Versioning and continuous deployment (Vercel and Render on every push to main).'}},
+  {name:'Windows / Linux',lvl:3,size:3, cat:{pt:'Ambiente',en:'Environment'}, desc:{pt:'Dois anos de suporte de TI na Prefeitura de Lins: redes, máquinas e configuração de sistemas.',en:'Two years of IT support at Lins City Hall: networks, machines and system configuration.'}}
 ];
 
 const SYS = [
-  {name:'GitHub',   val:'@VitorFongaro', url:'https://github.com/VitorFongaro', desc:'Repositórios, commits e uma cobrinha comendo meu gráfico de contribuições.'},
-  {name:'LinkedIn', val:'in/vitor-fongaro', url:'https://www.linkedin.com/in/vitor-fongaro', desc:'Perfil profissional e experiências.'},
-  {name:'E-mail',   val:'vitorfongaro@gmail.com', url:'mailto:vitorfongaro@gmail.com', desc:'Para propostas, parcerias ou só pra trocar ideia sobre código e jogos.', copy:true}
+  {name:{pt:'Currículo',en:'Résumé'}, cv:true,
+   desc:{pt:'Baixe meu currículo completo, com experiência, formação e competências técnicas.',en:'Download my full résumé, with experience, education and technical skills.'}},
+  {name:{pt:'GitHub',en:'GitHub'}, val:'@VitorFongaro', url:'https://github.com/VitorFongaro',
+   desc:{pt:'Repositórios, commits e uma cobrinha comendo meu gráfico de contribuições.',en:'Repositories, commits and a snake eating my contribution graph.'}},
+  {name:{pt:'LinkedIn',en:'LinkedIn'}, val:'in/vitor-fongaro', url:'https://www.linkedin.com/in/vitor-fongaro',
+   desc:{pt:'Perfil profissional e experiências.',en:'Professional profile and experience.'}},
+  {name:{pt:'E-mail',en:'E-mail'}, val:'vitorfongaro@gmail.com', url:'mailto:vitorfongaro@gmail.com', copy:true,
+   desc:{pt:'Para propostas, parcerias ou só pra trocar ideia sobre código e jogos.',en:'For job offers, collaborations or just to chat about code and games.'}}
 ];
+const CVS = [
+  {lang:'PT-BR', label:{pt:'Português',en:'Portuguese'}, file:'cv/Vitor_Fongaro_CV_PT.pdf', size:'28 KB'},
+  {lang:'EN',    label:{pt:'Inglês',en:'English'},       file:'cv/Vitor_Fongaro_CV_EN.pdf', size:'92 KB'}
+];
+
+/* ════════════════════ IDIOMA ════════════════════ */
+function pickLang(){
+  const q = new URLSearchParams(location.search).get('lang');
+  if(q==='pt'||q==='en') return q;
+  try{ const s = localStorage.getItem('vf-lang'); if(s==='pt'||s==='en') return s; }catch(e){}
+  return (navigator.language||'pt').toLowerCase().startsWith('pt') ? 'pt' : 'en';
+}
+let lang = pickLang();
+const t = k => UI[lang][k];
+const L = o => (o && typeof o==='object' && 'pt' in o) ? o[lang] : o;
 
 /* ════════════════════ SOM (WebAudio, sem arquivos) ════════════════════ */
 let soundOn = false, actx = null;
@@ -420,9 +516,8 @@ function blip(freq=880, dur=.05, type='square', vol=.035){
 }
 const sfx = { move:()=>blip(1200,.03), select:()=>{blip(660,.05);setTimeout(()=>blip(990,.07),50)}, tab:()=>blip(520,.06,'triangle',.06) };
 const soundBtn = document.getElementById('soundBtn');
-function renderSound(){ soundBtn.textContent = '♪ SOM: ' + (soundOn?'ON':'OFF'); soundBtn.setAttribute('aria-pressed', soundOn); }
+function renderSound(){ soundBtn.textContent = `♪ ${t('sound')}: ` + (soundOn?'ON':'OFF'); soundBtn.setAttribute('aria-pressed', soundOn); }
 soundBtn.onclick = () => { soundOn = !soundOn; try{localStorage.setItem('vf-sound', soundOn?'1':'0')}catch(e){}; renderSound(); sfx.select(); };
-renderSound();
 
 /* ════════════════════ TOAST ════════════════════ */
 const toastEl = document.getElementById('toast'); let toastT;
@@ -449,17 +544,7 @@ function questArt(name){
 
 /* ════════════════════ LISTAS GENÉRICAS ════════════════════ */
 function makeList(listEl, panelEl, data, metaFn, renderFn){
-  listEl.innerHTML = '';
-  const buttons = data.map((d,i)=>{
-    const li = document.createElement('li');
-    const b = document.createElement('button');
-    b.className = 'item'; b.innerHTML = `<span>${d.name}</span><span class="meta">${metaFn(d)}</span>`;
-    b.addEventListener('mouseenter', ()=>select(i,true));
-    b.addEventListener('focus', ()=>select(i,true));
-    b.addEventListener('click', ()=>{ select(i); sfx.select(); if(window.innerWidth<=820) panelEl.scrollIntoView({behavior:'smooth',block:'start'}); });
-    li.appendChild(b); listEl.appendChild(li); return b;
-  });
-  let cur = -1;
+  let buttons = [], cur = -1;
   function select(i, quiet){
     if(i===cur) return; cur=i;
     buttons.forEach((b,j)=>b.classList.toggle('sel', j===i));
@@ -467,8 +552,20 @@ function makeList(listEl, panelEl, data, metaFn, renderFn){
     panelEl.classList.remove('swap'); void panelEl.offsetWidth; panelEl.classList.add('swap');
     if(quiet) sfx.move();
   }
-  select(0);
-  return { buttons, get cur(){return cur}, select };
+  function render(){
+    listEl.innerHTML = '';
+    buttons = data.map((d,i)=>{
+      const li = document.createElement('li');
+      const b = document.createElement('button');
+      b.className = 'item'; b.innerHTML = `<span>${L(d.name)}</span><span class="meta">${metaFn(d)}</span>`;
+      b.addEventListener('mouseenter', ()=>select(i,true));
+      b.addEventListener('focus', ()=>select(i,true));
+      b.addEventListener('click', ()=>{ select(i); sfx.select(); if(window.innerWidth<=820) panelEl.scrollIntoView({behavior:'smooth',block:'start'}); });
+      li.appendChild(b); listEl.appendChild(li); return b;
+    });
+    const keep = Math.max(cur,0); cur = -1; select(keep);
+  }
+  return { get buttons(){return buttons}, get cur(){return cur}, select, render };
 }
 
 const lists = {};
@@ -480,14 +577,14 @@ lists.quests = makeList(
     <div class="panel-body">
       <div class="art">${questArt(q.name)}</div>
       <dl class="kv" style="margin-top:0;margin-bottom:16px">
-        <dt>TIPO</dt><dd>${q.type}</dd>
-        <dt>STATUS</dt><dd>${q.status}</dd>
+        <dt>${t('type')}</dt><dd>${L(q.type)}</dd>
+        <dt>${t('status')}</dt><dd>${L(q.status)}</dd>
       </dl>
-      <div class="desc"><p>${q.desc}</p></div>
-      <div class="tags">${q.stack.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="desc"><p>${L(q.desc)}</p></div>
+      <div class="tags">${q.stack.map(s=>`<span class="tag">${s}</span>`).join('')}</div>
       <div class="actions">
-        ${q.live ? `<a class="btn" href="${q.live}" target="_blank" rel="noopener">Jogar / Abrir</a>` : ''}
-        ${q.repo ? `<a class="btn" href="${q.repo}" target="_blank" rel="noopener">Código-fonte</a>` : `<span class="btn" aria-disabled="true">Arquivo confidencial</span>`}
+        ${q.live ? `<a class="btn" href="${q.live}" target="_blank" rel="noopener">${t('play')}</a>` : ''}
+        ${q.repo ? `<a class="btn" href="${q.repo}" target="_blank" rel="noopener">${t('source')}</a>` : `<span class="btn" aria-disabled="true">${t('classified')}</span>`}
       </div>
     </div>`
 );
@@ -497,13 +594,13 @@ lists.chips = makeList(
   document.getElementById('chipList'), document.getElementById('chipPanel'), CHIPS,
   c => '+' + c.lvl,
   c => `
-    <div class="panel-head"><span>${c.name} +${c.lvl}</span><span class="id">${c.cat.toUpperCase()}</span></div>
+    <div class="panel-head"><span>${c.name} +${c.lvl}</span><span class="id">${L(c.cat).toUpperCase()}</span></div>
     <div class="panel-body">
       <dl class="kv" style="margin-top:0;margin-bottom:16px">
-        <dt>NÍVEL</dt><dd>${'■'.repeat(c.lvl)}${'□'.repeat(5-c.lvl)}</dd>
-        <dt>TAMANHO</dt><dd>${sizeDots(c.size)}</dd>
+        <dt>${t('level')}</dt><dd>${'■'.repeat(c.lvl)}${'□'.repeat(5-c.lvl)}</dd>
+        <dt>${t('size')}</dt><dd>${sizeDots(c.size)}</dd>
       </dl>
-      <div class="desc"><p>${c.desc}</p></div>
+      <div class="desc"><p>${L(c.desc)}</p></div>
     </div>`
 );
 const used = CHIPS.reduce((a,c)=>a+c.size*2,0);
@@ -511,24 +608,37 @@ document.getElementById('capText').textContent = `${used}/128`;
 
 lists.system = makeList(
   document.getElementById('sysList'), document.getElementById('sysPanel'), SYS,
-  s => '',
-  s => `
-    <div class="panel-head"><span>${s.name}</span><span class="id">CANAL ABERTO</span></div>
+  s => s.cv ? 'PDF' : '',
+  s => s.cv ? `
+    <div class="panel-head"><span>${L(s.name)}</span><span class="id">${t('cvOpen')}</span></div>
     <div class="panel-body">
-      <div class="desc"><p>${s.desc}</p></div>
-      <dl class="kv"><dt>ENDEREÇO</dt><dd>${s.val}</dd></dl>
+      <div class="desc"><p>${L(s.desc)}</p></div>
+      <div class="dl-list">
+        ${CVS.map(c=>`
+          <div class="dl-row">
+            <div class="f">${c.file.split('/').pop()}<small>${L(c.label)} · PDF · ${c.size}</small></div>
+            <a class="btn" href="${c.file}" download>${t('download')} ${c.lang}</a>
+          </div>`).join('')}
+      </div>
+    </div>` : `
+    <div class="panel-head"><span>${L(s.name)}</span><span class="id">${t('open')}</span></div>
+    <div class="panel-body">
+      <div class="desc"><p>${L(s.desc)}</p></div>
+      <dl class="kv"><dt>${t('address')}</dt><dd>${s.val}</dd></dl>
       <div class="actions">
-        <a class="btn" href="${s.url}" ${s.url.startsWith('http')?'target="_blank" rel="noopener"':''}>Conectar</a>
-        ${s.copy ? `<button class="btn" onclick="copyText('${s.val}')">Copiar</button>` : ''}
+        <a class="btn" href="${s.url}" ${s.url.startsWith('http')?'target="_blank" rel="noopener"':''}>${t('connect')}</a>
+        ${s.copy ? `<button class="btn" onclick="copyText('${s.val}')">${t('copy')}</button>` : ''}
       </div>
     </div>`
 );
-function copyText(t){ navigator.clipboard?.writeText(t).then(()=>toast('ENDEREÇO COPIADO')).catch(()=>toast(t)); sfx.select(); }
+function copyText(v){ navigator.clipboard?.writeText(v).then(()=>toast(t('copied'))).catch(()=>toast(v)); sfx.select(); }
 
 /* ════════════════════ STATUS ════════════════════ */
-const ATTRS = [['LÓGICA',82],['FRONT-END',80],['BACK-END',68],['BANCO DE DADOS',72],['GAME DEV',60],['SORTE NO DEPLOY',23]];
-document.getElementById('bars').innerHTML = ATTRS.map(([k,v])=>`
-  <div class="bar"><span>${k}</span><div class="track"><div class="fill" data-v="${v}"></div></div><span class="v">${v}</span></div>`).join('');
+function renderStatus(){
+  document.getElementById('statusKv').innerHTML = t('kv').map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  document.getElementById('bars').innerHTML = t('attrs').map(([k,v])=>`
+    <div class="bar"><span>${k}</span><div class="track"><div class="fill" data-v="${v}"></div></div><span class="v">${v}</span></div>`).join('');
+}
 function animateBars(){ document.querySelectorAll('#bars .fill').forEach(f=>{ f.style.width='0'; requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.v+'%')); }); }
 
 // "sigilo" geométrico no lugar da foto
@@ -543,23 +653,41 @@ function animateBars(){ document.querySelectorAll('#bars .fill').forEach(f=>{ f.
   g.innerHTML = s;
 })();
 
+/* ════════════════════ APLICAR IDIOMA ════════════════════ */
+function applyLang(next, announce){
+  lang = next;
+  try{ localStorage.setItem('vf-lang', lang); }catch(e){}
+  document.documentElement.lang = t('htmlLang');
+  document.title = t('title');
+  document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML = t(el.dataset.i18nHtml));
+  document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.lang===lang));
+  renderStatus(); renderSound();
+  Object.values(lists).forEach(l=>l.render());
+  if(curView==='status') animateBars();
+  if(announce){ toast(t('langToast')); sfx.select(); }
+}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.lang!==lang) applyLang(b.dataset.lang, true); }));
+
 /* ════════════════════ ABAS ════════════════════ */
 const tabs = [...document.querySelectorAll('.tab')];
-const order = tabs.map(t=>t.dataset.view);
+const order = tabs.map(tb=>tb.dataset.view);
 let curView = 'status';
 function showView(v, quiet){
   if(!document.getElementById('view-'+v)) v = 'status';
   curView = v;
-  tabs.forEach(t=>t.setAttribute('aria-selected', t.dataset.view===v));
+  tabs.forEach(tb=>tb.setAttribute('aria-selected', tb.dataset.view===v));
   document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active', el.id==='view-'+v));
   if(v==='status') animateBars();
   if(v==='chips') { const f=document.getElementById('capFill'); f.style.width='0'; setTimeout(()=>f.style.width=`calc(${used/128*100}% - 2px)`,60); }
-  tabs.find(t=>t.dataset.view===v).scrollIntoView({block:'nearest',inline:'nearest'});
+  tabs.find(tb=>tb.dataset.view===v).scrollIntoView({block:'nearest',inline:'nearest'});
   if(!quiet) sfx.tab();
-  if(location.hash.slice(1)!==v) history.replaceState(null,'','#'+v);
+  if(location.hash.slice(1)!==v) history.replaceState(null,'',location.pathname+location.search+'#'+v);
 }
-tabs.forEach(t=>t.addEventListener('click',()=>showView(t.dataset.view)));
+tabs.forEach(tb=>tb.addEventListener('click',()=>showView(tb.dataset.view)));
 addEventListener('hashchange',()=>{ const v=location.hash.slice(1); if(v && v!==curView) showView(v); });
+
+applyLang(lang);
 
 /* ════════════════════ TECLADO ════════════════════ */
 document.addEventListener('keydown', e=>{
@@ -570,9 +698,9 @@ document.addEventListener('keydown', e=>{
   else if(['1','2','3','4'].includes(k)){ showView(order[+k-1]); }
   else if((k==='arrowdown'||k==='arrowup') && lists[curView]){
     e.preventDefault();
-    const L = lists[curView], n = L.buttons.length;
-    const next = (L.cur + (k==='arrowdown'?1:-1) + n) % n;
-    L.buttons[next].focus();
+    const Ls = lists[curView], n = Ls.buttons.length;
+    const next = (Ls.cur + (k==='arrowdown'?1:-1) + n) % n;
+    Ls.buttons[next].focus();
   }
 });
 
@@ -591,10 +719,10 @@ tick(); setInterval(tick,1000);
   function resize(){ W=c.width=innerWidth*devicePixelRatio; H=c.height=innerHeight*devicePixelRatio; c.style.width=innerWidth+'px'; c.style.height=innerHeight+'px'; }
   resize(); addEventListener('resize',resize);
   for(let i=0;i<38;i++) P.push({x:Math.random(),y:Math.random(),s:2+Math.random()*5,v:.00012+Math.random()*.0004,a:.05+Math.random()*.18,d:Math.random()*Math.PI*2});
-  (function loop(t){
+  (function loop(tm){
     x.clearRect(0,0,W,H);
     for(const p of P){
-      p.y -= p.v; p.x += Math.sin(t/4000+p.d)*.00012;
+      p.y -= p.v; p.x += Math.sin(tm/4000+p.d)*.00012;
       if(p.y<-.02){ p.y=1.02; p.x=Math.random(); }
       x.fillStyle=`rgba(78,75,66,${p.a})`;
       const s=p.s*devicePixelRatio; x.fillRect(p.x*W,p.y*H,s,s);
@@ -610,23 +738,14 @@ tick(); setInterval(tick,1000);
   const start = location.hash.slice(1);
   const finish = () => { if(boot.classList.contains('done')) return; boot.classList.add('done'); try{sessionStorage.setItem('vf-boot','1')}catch(e){}; showView(start||'status', true); };
   if(seen || matchMedia('(prefers-reduced-motion: reduce)').matches){ boot.classList.add('done'); showView(start||'status', true); return; }
-  const lines = [
-    '> INICIANDO SISTEMA ............ OK',
-    '> VERIFICANDO MEMÓRIA .......... OK',
-    '> CARREGANDO DADOS DA UNIDADE .. OK',
-    '> CONECTANDO AO GITHUB ......... OK',
-    '> UNIDADE: VITOR FONGARO',
-    '> CLASSE:  FULL-STACK DEVELOPER',
-    '',
-    '  BEM-VINDO.'
-  ];
+  const lines = t('boot');
   let li=0, ci=0, txt='';
   function step(){
     if(boot.classList.contains('done')) return;
     if(li>=lines.length){ out.innerHTML = txt + '<span class="cursor"></span>'; bar.style.width='100%'; setTimeout(finish,650); return; }
-    const L = lines[li];
-    if(ci<=L.length){ out.innerHTML = txt + L.slice(0,ci) + '<span class="cursor"></span>'; ci+=2; setTimeout(step,12); }
-    else{ txt += L + '\n'; li++; ci=0; bar.style.width = (li/lines.length*100)+'%'; setTimeout(step,110); }
+    const ln = lines[li];
+    if(ci<=ln.length){ out.innerHTML = txt + ln.slice(0,ci) + '<span class="cursor"></span>'; ci+=2; setTimeout(step,12); }
+    else{ txt += ln + '\n'; li++; ci=0; bar.style.width = (li/lines.length*100)+'%'; setTimeout(step,110); }
   }
   step();
   ['click','keydown','touchstart'].forEach(ev=>boot.addEventListener(ev,finish,{once:true}));
